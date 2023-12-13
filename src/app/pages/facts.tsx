@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useContext, useMemo } from 'react';
+import Cards from '../components/cards';
+import { FactsContext } from '../context/facts';
 
 const FactsPage: React.FC = () => {
-  return <h1>FactsPage</h1>;
+  const { facts, favouriteFacts, onToggleFavouriteFact, onDeleteFact } = useContext(FactsContext);
+
+  const favouriteFactsIds = useMemo(() => favouriteFacts.map((fact) => fact._id), [favouriteFacts]);
+
+  return (
+    <Cards
+      hoverable
+      data={facts}
+      selectedCards={favouriteFactsIds}
+      onToggleFavourite={onToggleFavouriteFact}
+      onDelete={onDeleteFact}
+    />
+  );
 };
 
 export default FactsPage;
