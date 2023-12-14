@@ -17,7 +17,7 @@ npm start
 Run the following command to run application unit tests
 
 ```bash
-npm test:unit
+npm run test:unit
 ```
 
 ## Building distributables

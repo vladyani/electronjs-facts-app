@@ -3,9 +3,9 @@ import Cards from '../components/cards';
 import { FactsContext } from '../context/facts';
 
 const FavouritesPage: React.FC = () => {
-  const { favouriteFacts, onToggleFavouriteFact, onDeleteFact } = useContext(FactsContext);
+  const { favouriteFacts } = useContext(FactsContext);
 
-  return <Cards data={favouriteFacts} onToggleFavourite={onToggleFavouriteFact} onDelete={onDeleteFact} />;
+  return <Cards data={favouriteFacts} />;
 };
 
 export default FavouritesPage;

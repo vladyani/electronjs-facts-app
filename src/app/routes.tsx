@@ -1,6 +1,7 @@
 import React from 'react';
 import Facts from './pages/facts';
 import Favourites from './pages/favourites';
+import Settings from './pages/settings';
 
 interface Route {
   name: string;
@@ -18,6 +19,11 @@ const routes: Route[] = [
     name: 'Favourites',
     path: '/favourites',
     component: <Favourites />,
+  },
+  {
+    name: 'Settings',
+    path: '/settings',
+    component: <Settings />,
   },
 ];
 

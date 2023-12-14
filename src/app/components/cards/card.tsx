@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { CardsProps } from '.';
+import React, { useState, useContext } from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {
@@ -14,14 +13,17 @@ import {
 } from '@mui/material';
 import { Fact } from '../../types/facts';
 import { formatDate } from '../../utils/date';
+import { FactsContext } from '../../context/facts';
 
-interface CardProps extends Omit<CardsProps, 'data'> {
+interface CardProps {
   data: Fact;
   selected: boolean;
+  hoverable?: boolean;
 }
 
-const Card: React.FC<CardProps> = ({ data, hoverable, selected, onToggleFavourite, onDelete }) => {
+const Card: React.FC<CardProps> = ({ data, hoverable, selected }) => {
   const [hovered, setHovered] = useState<boolean>(false);
+  const { onToggleFavouriteFact, onDeleteFact } = useContext(FactsContext);
 
   const handleMouseInteraction = (value: boolean) => {
     if (hoverable) {
@@ -44,12 +46,12 @@ const Card: React.FC<CardProps> = ({ data, hoverable, selected, onToggleFavourit
       <CardActions disableSpacing sx={{ marginTop: 'auto' }}>
         <Collapse in={hovered || !hoverable}>
           <Tooltip title={selected ? 'Remove from favorites' : 'Add to favorites'}>
-            <IconButton onClick={() => onToggleFavourite(data._id)}>
+            <IconButton onClick={() => onToggleFavouriteFact(data._id)}>
               <FavoriteIcon color={selected ? 'primary' : 'inherit'} />
             </IconButton>
           </Tooltip>
           <Tooltip title="Delete">
-            <IconButton onClick={() => onDelete(data._id)}>
+            <IconButton onClick={() => onDeleteFact(data._id)}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
